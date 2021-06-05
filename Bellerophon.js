@@ -1,7 +1,9 @@
 /* jshint esversion: 6 */
+const dotenv=require('dotenv');
+dotenv.config();
 const Discord=require('discord.js');
 const client=new Discord.Client();
-
+const prefix='!';
 
 client.on('ready', () => {
     console.log('Logged in...');
@@ -9,10 +11,13 @@ client.on('ready', () => {
   
   client.on('message', message => {
     const command=message.content;
-    if (message.author.bot) return;
+    if (!command.startsWith(prefix) || message.author.bot) return;
+
     if(command=='!smile'){
       message.channel.send(':catStretchedSmile:');
-    }//ad
+    }
+      
+   
     
 
     if(!message.member.roles.cache.has('850518741325971456')){
@@ -26,7 +31,7 @@ client.on('ready', () => {
   
   });
  
- client.login('ODUwNDkwMDUyMTAxNDA2NzUx.YLqelQ.TOEfMVSX1-StnbD2aFohenjUb_M');
+ client.login(process.env.TOKEN);
 
 
 
